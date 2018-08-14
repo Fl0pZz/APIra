@@ -40,3 +40,55 @@
 #### `options (optionsObj)` - конфига для axios, который будет смержен с дефолтным конфигом
 
 #### `extend ()` - копируем инстанс, сохраняя adapter, config и hooks
+
+## Как выглядят запросы или типичные юзкейсы
+
+Создание:
+```js
+import axios from 'axios'
+
+const api = new APIra({ adapter: axios.create() })
+```
+
+Отправка первого запроса:
+```js
+api
+  .url(http://example.ru/users/:id)
+  .params({ id: 10 })
+  .query({ filterA: 'a', filterB: 'b' })
+  .GET()
+
+api
+  .url(http://example.ru/users/:id)
+  .params({ id: 10 })
+  .data({ someData: 'someData' })
+  .POST()
+```
+
+Добавим хуков:
+```js
+const logHook = async (ctx, next) => {
+  console.log(ctx.response) // resonse == null
+  await next()
+  console.log(ctx.response) // resonse != null
+}
+
+api
+  .hook(logHook)
+  .url(http://example.ru/users/:id)
+  .params({ id: 10 })
+  .query({ filterA: 'a', filterB: 'b' })
+  .GET()
+```
+Наследование:
+```js
+const apiV1 = new APIra({ adapter: axios.create() })
+apiV1
+  .hook(logHook)
+  .options({
+    headers: {
+      Authorization: 'Bearer SomeToken'
+    }
+  })
+const apiV2 = apiV1.extend()
+```
