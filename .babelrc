@@ -2,7 +2,6 @@
   "presets": [
     [
       "@babel/preset-env", {
-        "useESModules": true,
         "targets": {
           "node": "current"
         }
