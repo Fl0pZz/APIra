@@ -1,5 +1,5 @@
 import mockAxios from 'jest-mock-axios'
-import APIra from '../src/APIra'
+import APIra from '../src/main'
 
 let api
 
@@ -10,7 +10,7 @@ beforeEach(() => {
 })
 
 it ('Create APIra', () => {
-  expect(api._isAPIraInstance).toBeTruthy()
+  expect(api instanceof APIra).toBeTruthy()
 })
 
 it ('Test exception', async () => {
@@ -36,7 +36,13 @@ it ('Test requests', () => {
     .data(clientData)
     .GET()
 
-  expect(mockAxios.get).toHaveBeenCalledWith('http://testserver.ru/api/v1/user/10', {data: clientData });
+  expect(mockAxios).toHaveBeenCalledWith(
+    {
+      url: 'http://testserver.ru/api/v1/user/10',
+      method: 'get',
+      data: clientData
+    }
+  );
 })
 
 it ('Test config', () => {

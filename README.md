@@ -3,10 +3,8 @@
 Простая библиотека для формирования запросов. Является оберткой над axios
 
 ## Основные возможности:
-* Хуки с интерфейсом миддлварей из koa (используется koa-compose)
-* Поддержка параметров url (спасибо pathToRegexp), например `http://example.ru/users/:id`
-* Доступны флаги выполнения запроса (`isPending`, `isResolved`, `isPending`, `isCalled`),
-которые можно использоваться для отображения различных свистоперделок UI
+* Хуки с интерфейсом миддлварей из koa (используется [koa-compose](https://github.com/koajs/compose))
+* Поддержка параметров url (спасибо [pathToRegexp](https://github.com/pillarjs/path-to-regexp)), например `http://example.ru/users/:id`
 * Возможность настройки конфига axios
 
 ## API
@@ -20,7 +18,7 @@
   
 #### `hook (hookFn)` - добавляем хук в очередь
 
-`hookFn` - функция вида `(ctx, next) => { next() }`
+`hookFn` - ТОЛЬКО АСИНХРОННЫЕ функции вида `async (ctx, next) => { await next() }`
 
 
 #### `url (str)` - задаем урл
@@ -53,13 +51,13 @@ const api = new APIra({ adapter: axios.create() })
 Отправка первого запроса:
 ```js
 api
-  .url(http://example.ru/users/:id)
+  .url('http://example.ru/users/:id')
   .params({ id: 10 })
   .query({ filterA: 'a', filterB: 'b' })
   .GET()
 
 api
-  .url(http://example.ru/users/:id)
+  .url('http://example.ru/users/:id')
   .params({ id: 10 })
   .data({ someData: 'someData' })
   .POST()
@@ -75,7 +73,7 @@ const logHook = async (ctx, next) => {
 
 api
   .hook(logHook)
-  .url(http://example.ru/users/:id)
+  .url('http://example.ru/users/:id')
   .params({ id: 10 })
   .query({ filterA: 'a', filterB: 'b' })
   .GET()
@@ -92,3 +90,6 @@ apiV1
   })
 const apiV2 = apiV1.extend()
 ```
+
+## TODO
+* Оптимизировать сборку

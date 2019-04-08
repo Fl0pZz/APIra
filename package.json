@@ -1,27 +1,28 @@
 {
-  "name": "APIra",
+  "name": "apira",
   "version": "1.0.0",
   "main": "dist/APIra.cjs.js",
   "module": "dist/APIra.esm.js",
   "browser": "dist/APIra.umd.js",
   "dependencies": {
-    "clone-deep": "^4.0.0",
-    "debug": "^3.1.0",
-    "deepmerge": "^2.1.1",
+    "@babel/polyfill": "^7.4.3",
+    "clone-deep": "^4.0.1",
+    "deepmerge": "^3.2.0",
     "koa-compose": "^4.1.0",
-    "path-to-regexp": "^2.2.1"
+    "path-to-regexp": "^3.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
     "axios": "^0.18.0",
-    "babel-cli": "^6.26.0",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-preset-env": "^1.7.0",
-    "jest": "^23.5.0",
-    "jest-mock-axios": "^2.1.11",
-    "rollup": "^0.64.0",
-    "rollup-plugin-babel": "^3.0.7",
-    "rollup-plugin-commonjs": "^9.1.0",
-    "rollup-plugin-node-resolve": "^3.0.0"
+    "babel-jest": "^24.7.1",
+    "jest": "^24.7.1",
+    "jest-mock-axios": "^2.3.0",
+    "rollup": "^1.9.0",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-node-resolve": "^4.2.1"
   },
   "peerDependencies": {
     "axios": "^0.18.0"
