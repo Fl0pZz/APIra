@@ -843,13 +843,17 @@ class APIra {
     this._config = config;
     this._genUriFn = null;
     this._queueHooks = Array.isArray(hooks) ? hooks : [hooks];
-    this._requestCalled = false;
+
     if (options instanceof APIra) {
       const cloned = options._clone();
       this._config = cloned._config;
       this._queueHooks = cloned._queueHooks;
       this._adapter = cloned._adapter;
     }
+    this.GET = this.GET.bind(this);
+    this.PUT = this.PUT.bind(this);
+    this.POST = this.POST.bind(this);
+    this.DELETE = this.DELETE.bind(this);
   }
 
   _request () {
