@@ -856,6 +856,9 @@ class APIra {
 
   _request () {
     assert(this._genUriFn == null, 'Undefined url: Set url before add params! Use .url() method ');
+    if (this._config.url == null) {
+      this._config.url = this._genUriFn({});
+    }
     const requestHook = async (ctx, next) => {
       ctx.response = await this._adapter(this._config);
       next();
