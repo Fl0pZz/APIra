@@ -23,7 +23,7 @@
 
 #### `url (str)` - задаем урл
 
-#### `params (paramsObj)` - задаем параметры для url. В `http://example.ru/users/:id` параметро является `id`
+#### `params (paramsObj)` - задаем параметры для url. В `http://example.ru/users/:id` параметром является `id`
 
 `paramsObj` - объект с параметрами
 
