@@ -1,6 +1,6 @@
 {
   "name": "apira",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "dist/APIra.cjs.js",
   "module": "dist/APIra.esm.js",
   "browser": "dist/APIra.umd.js",
