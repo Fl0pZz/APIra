@@ -854,10 +854,14 @@
         this._queueHooks = cloned._queueHooks;
         this._adapter = cloned._adapter;
       }
+      this.REQUEST = this.REQUEST.bind(this);
       this.GET = this.GET.bind(this);
       this.PUT = this.PUT.bind(this);
       this.POST = this.POST.bind(this);
       this.DELETE = this.DELETE.bind(this);
+      this.HEAD = this.HEAD.bind(this);
+      this.OPTIONS = this.OPTIONS.bind(this);
+      this.PATCH = this.PATCH.bind(this);
     }
 
     _request () {
@@ -924,21 +928,30 @@
     inspect () {
       return cloneDeep_1(this._config)
     }
-    GET () {
-      this._config.method = 'get';
+    REQUEST (method) {
+      this._config.method = method;
       return this._request()
+    }
+    GET () {
+      return this.REQUEST('get')
     }
     PUT () {
-      this._config.method = 'put';
-      return this._request()
+      return this.REQUEST('put')
     }
     POST () {
-      this._config.method = 'post';
-      return this._request()
+      return this.REQUEST('post')
     }
     DELETE () {
-      this._config.method = 'delete';
-      return this._request()
+      return this.REQUEST('delete')
+    }
+    HEAD () {
+      return this.REQUEST('head')
+    }
+    OPTIONS () {
+      return this.REQUEST('options')
+    }
+    PATCH () {
+      return this.REQUEST('patch')
     }
   }
 
