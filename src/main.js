@@ -62,6 +62,16 @@ export default class APIra {
     APIra._clear(cloned)
     return cloned
   }
+  _copy () {
+    const cloned = clone(this)
+    const apira = new APIra({
+      config: cloned._config,
+      hooks: cloned._queueHooks,
+      adapter: this._adapter
+    })
+    apira._genUriFn = this._genUriFn
+    return apira
+  }
 
   extend () {
     const cloned = this._clone()
@@ -77,26 +87,31 @@ export default class APIra {
   }
 
   hook (hookFn) {
-    this._queueHooks.push(hookFn)
-    return this
+    const apira = this._copy()
+    apira._queueHooks.push(hookFn)
+    return apira
   }
 
   url (path) {
-    this._genUriFn = pathToRegexp.compile(path)
-    return this
+    const apira = this._copy()
+    apira._genUriFn = pathToRegexp.compile(path)
+    return apira
   }
   params (params) {
     assert(this._genUriFn == null, 'Undefined url: Set url before add params! Use .url(path) method.')
-    this._config.url = this._genUriFn(params)
-    return this
+    const apira = this._copy()
+    apira._config.url = apira._genUriFn(params)
+    return apira
   }
   query (query) {
-    this._config.params = query
-    return this
+    const apira = this._copy()
+    apira._config.params = query
+    return apira
   }
   data (data) {
-    this._config.data = data
-    return this
+    const apira = this._copy()
+    apira._config.data = data
+    return apira
   }
 
   inspect () {
