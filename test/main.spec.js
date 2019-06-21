@@ -75,3 +75,11 @@ it ('Test extend', () => {
 
   expect(extend._config).not.toEqual(api._config);
 })
+
+it ('Test on immutable', () => {
+  const apira$1 = api
+    .url('http://testserver.ru/api/v1/user/:id')
+    .params({ id: 10 })
+  const apira$2 = apira$1.params({ id: 20 })
+  expect(apira$2._config).not.toEqual(apira$1._config);
+})

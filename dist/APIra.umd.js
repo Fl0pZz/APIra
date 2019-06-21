@@ -901,10 +901,9 @@
       return cloned
     }
     _copy () {
-      const cloned = cloneDeep_1(this);
       const apira = new APIra({
-        config: cloned._config,
-        hooks: cloned._queueHooks,
+        config: cloneDeep_1(this._config),
+        hooks: this._queueHooks,
         adapter: this._adapter
       });
       apira._genUriFn = this._genUriFn;
